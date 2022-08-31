@@ -1,0 +1,4 @@
+beautifulsoup4==4.11.1
+psycopg2-binary==2.9.3
+selenium==4.4.3
+webdriver-manager==3.8.3
