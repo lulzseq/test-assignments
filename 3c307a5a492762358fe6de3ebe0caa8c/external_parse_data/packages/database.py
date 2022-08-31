@@ -41,7 +41,7 @@ class Database:
         log('Create table: OK')
 
         for name in self.names:
-            cur.execute('''INSERT INTO ecomseller (item_name) VALUES (%s);''', (name,))
+            cur.execute(SQL('''INSERT INTO {} (item_name) VALUES (%s);''').format(Identifier(self.tablename)), (name,))
         conn.close()
 
     def match_data(self, name):

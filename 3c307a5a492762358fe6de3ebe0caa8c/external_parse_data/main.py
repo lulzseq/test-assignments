@@ -1,9 +1,9 @@
+from config import POSTGRES_NAME, POSTGRES_PASSWORD, TABLE_NAME
 from packages.database import Database
 from packages.parser import Parser
 from src.fill_db_data import names
 from src.marketplaces_data import market_dict
 from src.url_list import urls
-from config import POSTGRES_NAME, POSTGRES_PASSWORD, TABLE_NAME
 
 
 def main(url, db):
