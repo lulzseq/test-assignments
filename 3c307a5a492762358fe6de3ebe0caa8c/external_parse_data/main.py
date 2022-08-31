@@ -3,6 +3,7 @@ from packages.parser import Parser
 from src.fill_db_data import names
 from src.marketplaces_data import market_dict
 from src.url_list import urls
+from config import POSTGRES_NAME, POSTGRES_PASSWORD, TABLE_NAME
 
 
 def main(url, db):
@@ -26,7 +27,7 @@ def main(url, db):
 
 
 if __name__ == '__main__':
-    db = Database('postgres', 'postgres', 'ecomseller', names)
+    db = Database(POSTGRES_NAME, POSTGRES_PASSWORD, TABLE_NAME, names)
     db.prepare_db()
 
     for url in urls:
