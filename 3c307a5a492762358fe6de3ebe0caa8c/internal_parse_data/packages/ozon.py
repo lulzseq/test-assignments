@@ -10,7 +10,7 @@ db = Database(DB_USERNAME, DB_PASSWORD, DB_NAME, TABLE_NAME)
 
 class Ozon(ApiBasic):
 
-    def __init__(self, client_id, api_key):
+    def __init__(self, client_id: str, api_key: str):
         self.host = 'https://api-seller.ozon.ru'
         self.api_key = api_key
         self.client_id = client_id
@@ -32,7 +32,7 @@ class Ozon(ApiBasic):
         db.write_log(datetime.now(), inspect.stack()[0][3], method, response)
         return response
 
-    def add_item_to_actions(self, product_list):
+    def add_item_to_actions(self, product_list: list):
         method = '/v1/actions/products/activate'
         params = {
             'action_id': 60564,
@@ -42,7 +42,7 @@ class Ozon(ApiBasic):
         db.write_log(datetime.now(), inspect.stack()[0][3], method, response)
         return response
 
-    def remove_item_from_actions(self, product_ids_list):
+    def remove_item_from_actions(self, product_ids_list: list) -> object:
         method = '/v1/actions/products/deactivate'
         params = {
             'action_id': 66011,

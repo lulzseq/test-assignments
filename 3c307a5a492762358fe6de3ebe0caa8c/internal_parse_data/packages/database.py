@@ -5,13 +5,13 @@ from psycopg2.sql import SQL, Identifier
 
 class Database:
 
-    def __init__(self, username, password, dbname, tablename):
+    def __init__(self, username: str, password: str, dbname: str, tablename: str) -> None:
         self.username = username
         self.password = password
         self.dbname = dbname
         self.tablename = tablename
 
-    def create_table(self):
+    def create_table(self) -> None:
         conn = psycopg2.connect(dbname=self.dbname, user=self.username,
                                 host='127.0.0.1', password=self.password)
 
@@ -27,7 +27,7 @@ class Database:
             ''').format(Identifier(self.tablename)))
         conn.close()
 
-    def write_log(self, datetime, action, method, response):
+    def write_log(self, datetime: object, action: str, method: str, response: str) -> None:
         conn = psycopg2.connect(dbname=self.dbname, user=self.username,
                                 host='127.0.0.1', password=self.password)
 
@@ -37,4 +37,3 @@ class Database:
             Identifier(
                 self.tablename)), (datetime, action, method, response))
         conn.close()
-        return

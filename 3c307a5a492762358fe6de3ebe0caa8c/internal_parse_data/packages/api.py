@@ -16,9 +16,9 @@ class ApiBasic:
 
 
 class HttpException(Exception):
-    def __init__(self, status, message=''):
+    def __init__(self, status: int, message: str = '') -> None:
         self.status = status
         self.message = message
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'ERROR: {self.status}\n{self.message}'
