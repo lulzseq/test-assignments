@@ -14,5 +14,4 @@ def log(msg):
         logger.handlers.clear()
 
     logger.addHandler(ch)
-    logger.info(msg)
-    return logger
+    return logger.info(msg)

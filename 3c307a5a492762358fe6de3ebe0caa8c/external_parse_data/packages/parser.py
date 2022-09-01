@@ -11,13 +11,13 @@ from webdriver_manager.chrome import ChromeDriverManager
 from .logger import log
 
 
-class Parser():
-    def __init__(self, url, market_dict):
+class Parser:
+    def __init__(self, url: str, market_dict: dict) -> None:
         self.url = url
         self.host = self.url.split('/')[2]
         self.market_dict = market_dict
 
-    def _open_browser(self):
+    def open_browser(self) -> None:
         caps = DesiredCapabilities().CHROME
         caps['pageLoadStrategy'] = 'eager'
         chrome_options = Options()
@@ -28,7 +28,7 @@ class Parser():
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options,
                                        desired_capabilities=caps)
 
-    def _load_page(self, url):
+    def load_page(self, url: str) -> str:
         print(f'Page: {url}')
         try:
             self.driver.get(url)
@@ -36,7 +36,8 @@ class Parser():
             self.driver.implicitly_wait(5)
         except InvalidArgumentException:
             self.driver.quit()
-            return log('Load page: ERROR'), -1
+            log('Load page: ERROR')
+            return ''
 
         html = self.driver.page_source
 
@@ -48,7 +49,7 @@ class Parser():
         log('Load page: OK')
         return html
 
-    def get_elements(self, html):
+    def get_elements(self, html: str) -> tuple:
         soup = BeautifulSoup(html, 'html.parser')
         name = ''.join([p.text for p in soup.find_all('h1')])
 

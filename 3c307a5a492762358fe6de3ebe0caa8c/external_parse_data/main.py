@@ -1,4 +1,4 @@
-from config import POSTGRES_NAME, POSTGRES_PASSWORD, TABLE_NAME
+from config import POSTGRES_NAME, POSTGRES_PASSWORD, DB_NAME
 from packages.database import Database
 from packages.parser import Parser
 from src.fill_db_data import names
@@ -8,8 +8,8 @@ from src.url_list import urls
 
 def main(url, db):
     parser = Parser(url, market_dict)
-    parser._open_browser()
-    html = parser._load_page(url)
+    parser.open_browser()
+    html = parser.load_page(url)
     item_name, item_price = parser.get_elements(html)
 
     match_response = db.match_data(item_name)
@@ -27,10 +27,10 @@ def main(url, db):
 
 
 if __name__ == '__main__':
-    db = Database(POSTGRES_NAME, POSTGRES_PASSWORD, TABLE_NAME, names)
+    db = Database(POSTGRES_NAME, POSTGRES_PASSWORD, DB_NAME, names)
     db.prepare_db()
 
     for url in urls:
         main(url, db)
 
-# TODO: docker-compose, connect postgres
+# TODO: async, docker-compose
